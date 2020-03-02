@@ -41,11 +41,13 @@ class SplashScreenActivity : AbstractActivity() {
             object : RequestCallBack<Config> {
 
                 override fun onSuccess(response: Config) {
-                    showSuccessDialog("yeaaah")
+                    hideProgressDialog()
+                    showSuccessDialog()
                     Log.d("test" , response.status)
                 }
 
                 override fun onError(error: UgcError) {
+                    hideProgressDialog()
                     showError(error.message)
                 }
             }

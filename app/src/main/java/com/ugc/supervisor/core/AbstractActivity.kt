@@ -13,6 +13,7 @@ import com.ugc.supervisor.common.ui.SuccessDialog
 abstract class AbstractActivity : AppCompatActivity() {
 
     val ERROR_DIALOG = "errorDialog"
+    val SUCCESS_DIALOG = "successMessage"
 
     lateinit var progressDialog: ProgressDialog
 
@@ -65,9 +66,14 @@ abstract class AbstractActivity : AppCompatActivity() {
     }
 
     open fun showSuccessDialog(message: String) {
-        SuccessDialog(this)
-            .setText(message)
-            .show()
+        val successDialog : SuccessDialog = SuccessDialog()
+        .setMessage(message)
+
+        successDialog.show(supportFragmentManager, SUCCESS_DIALOG)
+    }
+
+    open fun showSuccessDialog() {
+        showSuccessDialog("")
     }
 
     open fun showError(message: String?) {

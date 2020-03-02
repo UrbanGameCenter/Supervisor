@@ -20,10 +20,6 @@ class ErrorDialogFragment : DialogFragment() {
     var isLargeSize = false
 
 
-    fun onClickCancelButton() {
-        dismiss()
-    }
-
     private var title: String? = null
     private var message: String? = null
 

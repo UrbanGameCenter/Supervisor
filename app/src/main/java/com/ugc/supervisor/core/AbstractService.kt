@@ -5,6 +5,9 @@ import android.util.Log
 import com.ugc.supervisor.R
 import com.ugc.supervisor.model.ErrorType
 import com.ugc.supervisor.model.UgcError
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 
 abstract class AbstractService<T>(var context : Context) {
@@ -25,14 +28,15 @@ abstract class AbstractService<T>(var context : Context) {
             }
             val response= call.execute()
 
-            if (response.isSuccessful) {
+            CoroutineScope(Dispatchers.Main).launch {
 
-                response.body()?.let { callback.onSuccess(it) }
-                return
-
-            } else {
-                callback.onError(
-                    UgcError(ErrorType.BACKEND_ERROR, response.errorBody()!!.string()))
+                if (response.isSuccessful) {
+                    response.body()?.let { callback.onSuccess(it) }
+                } else {
+                    callback.onError(
+                        UgcError(ErrorType.BACKEND_ERROR, response.errorBody()!!.string())
+                    )
+                }
             }
         } catch (e: Exception) {
             Log.e(AbstractService::class.java.simpleName, e.toString())

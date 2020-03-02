@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class TechnicalService(context : Context) : AbstractService<Config>(context) {
 
-    @MainThread
+    @WorkerThread
      fun getConfig(callback: RequestCallBack<Config>) {
         CoroutineScope(Dispatchers.IO).launch {
             execute(
