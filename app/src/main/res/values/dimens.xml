@@ -6,12 +6,14 @@
     <dimen name="margin_standard">20dp</dimen>
     <dimen name="margin_medium">14dp</dimen>
 
-
     <dimen name="padding_standard">20dp</dimen>
-
 
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_standard">16sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="large_interline">6sp</dimen>
+
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_min_width">111dp</dimen>
+    <dimen name="button_radius">40dp</dimen>
 </resources>

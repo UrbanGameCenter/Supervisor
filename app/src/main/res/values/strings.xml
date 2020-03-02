@@ -5,5 +5,6 @@
     <string name="netword_unavailable_generic_error">Vous n\'êtes pas connecté à Internet. Veuillez rétablir votre connexion pour continuer.</string>
     <string name="unexcepted_generic_error">Une erreur inattendue est survenu</string>
     <string name="cancel">Fermer</string>
+    <string name="retry">Recommencer</string>
 
 </resources>
