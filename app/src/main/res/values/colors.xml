@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#26272f</color>
+    <color name="colorAccent">#DD2583</color>
+
+    <color name="textColor">#868893</color>
+    <color name="antracite_grey">#404A56</color>
+
+    <color name="dialog_overlay_transparency">#88000000</color>
+    <color name="green_validate">#29AF56</color>
+
+
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:maxWidth="600dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginTop="@dimen/marge_large"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:background="@drawable/dialog_rounded_bg"
+    android:layout_marginBottom="@dimen/marge_large"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding_standard"
+    android:paddingEnd="@dimen/padding_standard">
+
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:gravity="center_horizontal"
+        android:textColor="@color/antracite_grey"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:id="@+id/message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:gravity="center_horizontal"
+        android:maxLines="6"
+        android:textColor="@color/antracite_grey"
+        android:textSize="@dimen/text_size_standard"
+        tools:text="Message" />
+
+    <TextView
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:layout_marginTop="@dimen/marge_large"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_standard" />
+</LinearLayout>
