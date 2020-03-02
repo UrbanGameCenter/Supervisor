@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class TechnicalService(context : Context) : AbstractService<Config>(context) {
 
     @MainThread
-    fun getConfig(callback: RequestCallBack<Config>) {
+     fun getConfig(callback: RequestCallBack<Config>) {
         CoroutineScope(Dispatchers.IO).launch {
             execute(
                 apiEndPoint.getConfig(),

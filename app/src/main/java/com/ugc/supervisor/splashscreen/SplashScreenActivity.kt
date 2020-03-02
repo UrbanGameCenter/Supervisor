@@ -38,7 +38,7 @@ class SplashScreenActivity : AbstractActivity() {
 
     private fun getConfig() {
         TechnicalService(baseContext).getConfig(
-            object : RequestCallBack<Config>() {
+            object : RequestCallBack<Config> {
 
                 override fun onSuccess(response: Config) {
                     showSuccessDialog("yeaaah")

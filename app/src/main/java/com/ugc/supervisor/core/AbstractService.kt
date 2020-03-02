@@ -16,7 +16,7 @@ abstract class AbstractService<T>(var context : Context) {
     }
 
 
-    protected fun <Result> execute(call: Call<Result>, callback: RequestCallBack<Result> ) {
+    protected suspend fun <Result> execute(call: Call<Result>, callback: RequestCallBack<Result> ) {
         try {
             if(!NetworkUtil.verifyAvailableNetwork(context)){
                 callback.onError(
@@ -27,7 +27,7 @@ abstract class AbstractService<T>(var context : Context) {
 
             if (response.isSuccessful) {
 
-                callback.onSuccess(response.body())
+                response.body()?.let { callback.onSuccess(it) }
                 return
 
             } else {
