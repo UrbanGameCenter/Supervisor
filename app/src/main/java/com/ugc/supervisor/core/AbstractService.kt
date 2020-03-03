@@ -19,11 +19,17 @@ abstract class AbstractService<T>(var context : Context) {
     }
 
 
-    protected suspend fun <Result> execute(call: Call<Result>, callback: RequestCallBack<Result> ) {
+    protected fun <Result> execute(call: Call<Result>, callback: RequestCallBack<Result> ) {
         try {
             if(!NetworkUtil.verifyAvailableNetwork(context)){
-                callback.onError(
-                    UgcError(ErrorType.NETWORK_ERROR, context.getString(R.string.netword_unavailable_generic_error)))
+                CoroutineScope(Dispatchers.Main).launch {
+                    callback.onError(
+                        UgcError(
+                            ErrorType.NETWORK_ERROR,
+                            context.getString(R.string.netword_unavailable_generic_error)
+                        )
+                    )
+                }
                 return
             }
             val response= call.execute()
@@ -40,8 +46,15 @@ abstract class AbstractService<T>(var context : Context) {
             }
         } catch (e: Exception) {
             Log.e(AbstractService::class.java.simpleName, e.toString())
-            callback.onError(
-                UgcError(ErrorType.UNEXCEPTED_ERROR, context.getString(R.string.unexcepted_generic_error)))
+
+            CoroutineScope(Dispatchers.Main).launch {
+                callback.onError(
+                    UgcError(
+                        ErrorType.UNEXCEPTED_ERROR,
+                        context.getString(R.string.unexcepted_generic_error)
+                    )
+                )
+            }
         }
     }
 }

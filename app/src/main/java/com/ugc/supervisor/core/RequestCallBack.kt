@@ -1,14 +1,14 @@
 package com.ugc.supervisor.core
 
-import androidx.annotation.UiThread
+import androidx.annotation.MainThread
 import com.ugc.supervisor.model.UgcError
 
 interface RequestCallBack<Result> {
 
-    @UiThread
+    @MainThread
     fun onSuccess(result : Result)
 
-    @UiThread
+    @MainThread
     fun onError(error : UgcError)
 
 }

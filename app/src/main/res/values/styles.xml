@@ -34,4 +34,17 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="RoundedEditTextStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/antracite_grey</item>
+        <item name="android:textColorHint">@color/manatee_grey</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+        <item name="android:paddingTop">@dimen/small</item>
+        <item name="android:paddingBottom">@dimen/small</item>
+        <item name="android:paddingStart">@dimen/small</item>
+        <item name="android:paddingEnd">@dimen/small</item>
+        <item name="android:cursorVisible">true</item>
+    </style>
+
+    <dimen name="small">8dp</dimen>
 </resources>

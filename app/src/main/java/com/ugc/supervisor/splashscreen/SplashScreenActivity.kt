@@ -26,7 +26,7 @@ class SplashScreenActivity : AbstractActivity() {
 
         showAppVersion()
 
-        retry_button.setOnClickListener { showRetry() }
+        retry_button.setOnClickListener { getConfig() }
     }
 
     override fun onResume() {
@@ -57,19 +57,14 @@ class SplashScreenActivity : AbstractActivity() {
     }
 
     private fun showLoader() {
-        progress_wheel.visibility = View.VISIBLE
+        progress_wheel.show()
         retry_button.visibility = View.GONE
-        val rotation = AnimationUtils.loadAnimation(baseContext, R.anim.rotate)
-        rotation.repeatCount = Animation.INFINITE
 
-        if (progress_wheel != null) {
-            progress_wheel.startAnimation(rotation)
-        }
     }
 
     private fun showRetry(){
-        progress_wheel.visibility = View.GONE
         retry_button.visibility = View.VISIBLE
+        progress_wheel.hide()
     }
 
     private fun showAppVersion() {
