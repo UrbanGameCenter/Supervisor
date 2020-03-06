@@ -1,24 +1,19 @@
 package com.ugc.supervisor.supervisor.adapter
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ugc.supervisor.R
-import com.ugc.supervisor.websocket.model.Message
+import com.ugc.supervisor.websocket.model.MessageFrom
 import kotlinx.android.synthetic.main.simple_message_item_layout.view.*
 import java.util.*
 
 class SimpleMessageAdapter(val context: Context)
     : RecyclerView.Adapter<SimpleMessageAdapter.ViewHolder>() {
 
-    private val messageList: MutableList<Message> = ArrayList()
+    private val messageFromList: MutableList<MessageFrom> = ArrayList()
 
     private var lastPosition = -1
 
@@ -28,36 +23,36 @@ class SimpleMessageAdapter(val context: Context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val message: Message = messageList[position]
+        val messageFrom: MessageFrom = messageFromList[position]
 
-        holder.bind(message)
+        holder.bind(messageFrom)
     }
 
 
     override fun getItemCount(): Int {
-        return if (messageList.size > 0) messageList.size else 0
+        return if (messageFromList.size > 0) messageFromList.size else 0
     }
 
     fun clearData() {
-        messageList.clear()
+        messageFromList.clear()
     }
 
-    fun addData(message: Message) {
-        messageList.add(message)
+    fun addData(messageFrom: MessageFrom) {
+        messageFromList.add(messageFrom)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val messageTextView = itemView.message_textview
         val infoTextView = itemView.info_textview
 
-        fun bind(message : Message) {
-            if (!message.isServerMessage) {
+        fun bind(messageFrom : MessageFrom) {
+            if (!messageFrom.isServerMessage) {
                 // TODO
             } else {
                 //TODO
             }
-            messageTextView.setText(message.message)
-            infoTextView.setText(message.getFormatedDate() + " Message envoyé")
+            messageTextView.setText(messageFrom.message)
+            infoTextView.setText(messageFrom.getFormatedDate() + " Message envoyé")
         }
     }
 }

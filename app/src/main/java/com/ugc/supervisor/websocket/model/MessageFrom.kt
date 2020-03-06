@@ -1,6 +1,6 @@
 package com.ugc.supervisor.websocket.model
 
-class Message {
+class MessageFrom {
     var emitter: String
     var message: String
     private var date: String
@@ -12,7 +12,7 @@ class Message {
         this.date = date
     }
 
-    fun setIsServerMessage(isServerMessage: Boolean): Message {
+    fun setIsServerMessage(isServerMessage: Boolean): MessageFrom {
         this.isServerMessage = isServerMessage
         return this
     }

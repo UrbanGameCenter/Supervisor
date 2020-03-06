@@ -2,10 +2,7 @@ package com.ugc.supervisor.splashscreen
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.AbstractActivity
@@ -13,7 +10,8 @@ import com.ugc.supervisor.core.RequestCallBack
 import com.ugc.supervisor.model.Config
 import com.ugc.supervisor.model.UgcError
 import com.ugc.supervisor.services.TechnicalService
-import com.ugc.supervisor.supervisor.SupervisorActivity
+import com.ugc.supervisor.supervisor.MainActivity
+import com.ugc.supervisor.websocket.core.WebsocketManager
 import kotlinx.android.synthetic.main.splashscreen_activity.*
 
 class SplashScreenActivity : AbstractActivity() {
@@ -43,8 +41,7 @@ class SplashScreenActivity : AbstractActivity() {
             object : RequestCallBack<Config> {
 
                 override fun onSuccess(response: Config) {
-                    Log.d("test" , response.status)
-                    startActivity(SupervisorActivity.newIntent(baseContext))
+                    startActivity(MainActivity.newIntent(baseContext))
                     finishAffinity()
                 }
 

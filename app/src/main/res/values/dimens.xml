@@ -13,7 +13,12 @@
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="large_interline">6sp</dimen>
 
+    <dimen name="small">8dp</dimen>
+
     <dimen name="button_height">48dp</dimen>
     <dimen name="button_min_width">111dp</dimen>
     <dimen name="button_radius">40dp</dimen>
+
+    <dimen name="tabnav_size">12dp</dimen>
+    <dimen name="tab_indicator_height">4dp</dimen>
 </resources>

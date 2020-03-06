@@ -27,6 +27,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:screenOrientation="landscape"
             android:theme="@style/FullTranslucent"/>
+        <activity android:name=".supervisor.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullTranslucent"/>
     </application>
 
 </manifest>

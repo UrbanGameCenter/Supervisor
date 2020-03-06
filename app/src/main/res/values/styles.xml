@@ -46,5 +46,9 @@
         <item name="android:cursorVisible">true</item>
     </style>
 
-    <dimen name="small">8dp</dimen>
+    <style name="NavigationTabTextAppeareance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/tabnav_size</item>
+    </style>
+
 </resources>
