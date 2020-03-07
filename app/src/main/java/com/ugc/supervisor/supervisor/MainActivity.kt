@@ -24,6 +24,7 @@ class MainActivity : AbstractActivity() {
         setContentView(R.layout.main_activity)
 
         viewpager.setAdapter(RoomPagerAdapter(this.supportFragmentManager, baseContext))
+        viewpager.offscreenPageLimit = 3
 
         tabs.setupWithViewPager(viewpager)
         tabs.setTabMode(TabLayout.MODE_FIXED)

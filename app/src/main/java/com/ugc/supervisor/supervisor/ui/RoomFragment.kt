@@ -12,29 +12,29 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.LOGGER_TAG
 import com.ugc.supervisor.core.WEB_SERVICE_BASE_URL
 import com.ugc.supervisor.model.Room
 import com.ugc.supervisor.supervisor.adapter.SimpleMessageAdapter
-import com.ugc.supervisor.websocket.core.WebsocketManager
+import com.ugc.supervisor.supervisor.callback.SelectTextCallback
 import com.ugc.supervisor.websocket.model.EventType
 import com.ugc.supervisor.websocket.model.MessageFrom
 import com.ugc.supervisor.websocket.model.MessageTo
+import com.ugc.ugctv.settings.SelectTextDialogfragment
 import io.socket.client.IO
 import io.socket.emitter.Emitter
-import kotlinx.android.synthetic.main.room_fragment.message_listview
-import kotlinx.android.synthetic.main.room_fragment.send_button
-import kotlinx.android.synthetic.main.room_fragment.textmessage_edittext
-import org.json.JSONObject
+import kotlinx.android.synthetic.main.room_fragment.*
 
 class RoomFragment(val room: Room, context: Context) : Fragment() {
 
+    private val SELECT_TEXT_DIALOG = "SELECT_TEXT_DIALOG"
 
     private var socket = IO.socket(WEB_SERVICE_BASE_URL)
 
     private val adapter: SimpleMessageAdapter
+
+    private lateinit var selectTextDialogfragment : SelectTextDialogfragment
 
     companion object {
 
@@ -76,18 +76,40 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         message_listview.setLayoutManager(linearLayoutManager);
         message_listview.setAdapter(adapter);
 
+        list_text.setOnClickListener{
+            selectTextDialogfragment = SelectTextDialogfragment(room)
+                .setCallBack(object : SelectTextCallback {
+                    override fun onTextSelected(text: String) {
+                        selectTextDialogfragment.dismiss()
+                        free_textmessage_edittext.setText(text)
+                    }
+                })
+
+            selectTextDialogfragment.show(activity!!.supportFragmentManager, SELECT_TEXT_DIALOG)
+        }
+
         send_button.setOnClickListener {
 
             socket.emit(
                 EventType.supervisorMessage.name,
                 Gson().toJson(
                     MessageTo(
-                        textmessage_edittext.getText().toString(),
+                        free_textmessage_edittext.getText().toString(),
                         room.name
                     )
                 )
             )
-            textmessage_edittext.getText().clear()
+            addMessage(MessageFrom(
+                "Supervisor",
+                free_textmessage_edittext.getText().toString()
+            ))
+
+            free_textmessage_edittext.getText().clear()
+        }
+
+        action_button.setOnClickListener{
+            action_indicator.setImageResource(R.drawable.ic_stop)
+            chronometer.start()
         }
 
     }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="jig_saw_messages">
+        <item>message numéro 1</item>
+        <item>message numéro 2</item>
+        <item>message numéro 3</item>
+        <item>message numéro 4</item>
+    </string-array>
+
+    <string-array name="prison_breakout_messages">
+        <item>message numéro 1</item>
+        <item>message numéro 2</item>
+        <item>message numéro 3</item>
+        <item>message numéro 4</item>
+    </string-array>
+
+    <string-array name="howard_carter_messages">
+        <item>message numéro 1</item>
+        <item>message numéro 2</item>
+        <item>message numéro 3</item>
+        <item>message numéro 4</item>
+        <item>message numéro 5</item>
+        <item>message numéro 6</item>
+        <item>message numéro 7</item>
+        <item>message numéro 8</item>
+        <item>message numéro 10</item>
+        <item>message numéro 11</item>
+        <item>message numéro 12</item>
+        <item>message numéro 13</item>
+        <item>message numéro 14</item>
+        <item>message numéro 15</item>
+
+
+
+
+
+
+
+
+
+
+    </string-array>
+
+</resources>
