@@ -35,6 +35,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
 
     private lateinit var selectTextDialogfragment: SelectTextDialogfragment
 
+    var isStarted = false
+
     companion object {
         fun newInstance(room: Room, context: Context): RoomFragment {
             return RoomFragment(room, context)
@@ -106,8 +108,17 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         }
 
         action_button.setOnClickListener {
-            action_indicator.setImageResource(R.drawable.ic_stop)
-            chronometer.start()
+            if(isStarted){
+                WebsocketManager.instance.stopRoom(room)
+                action_indicator.setImageResource(R.drawable.ic_play)
+                chronometer.stop()
+                isStarted = false
+            }else{
+                WebsocketManager.instance.startRoom(room)
+                action_indicator.setImageResource(R.drawable.ic_stop)
+                chronometer.start()
+                isStarted = true
+            }
         }
     }
 

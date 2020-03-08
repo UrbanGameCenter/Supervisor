@@ -80,4 +80,16 @@ class WebsocketManager private constructor() {
     fun onDestroy() {
         socket.disconnect()
     }
+
+    fun startRoom(room: Room) {
+        socket.emit(
+            EventType.start.name,
+            room.name)
+    }
+
+    fun stopRoom(room: Room) {
+        socket.emit(
+            EventType.stop.name,
+            room.name)
+    }
 }
