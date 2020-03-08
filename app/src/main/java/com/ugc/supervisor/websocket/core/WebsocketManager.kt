@@ -16,7 +16,7 @@ import org.json.JSONObject
 
 class WebsocketManager private constructor() {
 
-   /* private object HOLDER {
+    private object HOLDER {
         val INSTANCE = WebsocketManager()
     }
 
@@ -25,10 +25,7 @@ class WebsocketManager private constructor() {
     }
 
     private val WEBSOCKET_LOGGER_TAG = "Websocket manager Logger"
-
     private var socket = IO.socket(WEB_SERVICE_BASE_URL)
-
-
     private val gson: Gson
 
 
@@ -42,25 +39,12 @@ class WebsocketManager private constructor() {
             .create()
 
         initSocket()
-
-        //subscribeEvent()
     }
 
-    fun joinRoomMessage(
-        room: Room,
-        listener: Emitter.Listener){
-        Log.d(
-            WEBSOCKET_LOGGER_TAG,
-            "Joining room : " + room.name
-        )
-        socket.emit(EventType.joinRoom.name, room.name)
-        socket.on(EventType.supervisorMessage.name, listener)
 
-    }
-
-    private fun subscribeEvent() {
-        socket.on(EventType.supervisorMessage.name, onSupervisorMessage)
-        socket.on(EventType.serverMessage.name, onServerMessage)
+    public fun subscribeEvent(event: String, listener: Emitter.Listener) {
+        Log.d(WEBSOCKET_LOGGER_TAG, "Event " + event + " now listened")
+        socket.on(event, listener)
     }
 
     private fun initSocket() {
@@ -86,48 +70,14 @@ class WebsocketManager private constructor() {
     }
 
 
-    private val onSupervisorMessage =
-        Emitter.Listener { args: Array<Any> ->
-            /*runOnUiThread {
-                addMessage(getMessage(args[0] as JSONObject))
-            }*/
-        }
-
-    private val onServerMessage =
-        Emitter.Listener { args: Array<Any?> ->
-            /*runOnUiThread {
-                addMessage(getMessage(args[0] as JSONObject).setIsServerMessage(true))
-            }*/
-        }
-
-    private fun getMessage(data: JSONObject): MessageFrom {
-        return MessageFrom(
-            data["emitter"] as String,
-            data["message"] as String,
-            data["date"] as String
-        )
-    }
-
-    private fun addMessage(messageFrom: MessageFrom) {
-        Log.d(
-            WEBSOCKET_LOGGER_TAG,
-            "Message from " + messageFrom.emitter +" : " + messageFrom.message)
-
-        /*adapter.addData(message)
-        adapter.notifyDataSetChanged()*/
-    }
-
-     fun onDestroy() {
-
-        socket.disconnect()
-        socket.off(EventType.supervisorMessage.name, onSupervisorMessage)
-        socket.off(EventType.serverMessage.name, onServerMessage)
-    }
-
     fun sendMessage(message: MessageTo) {
         socket.emit(
             EventType.supervisorMessage.name,
             gson.toJson(message)
         )
-    }*/
+    }
+
+    fun onDestroy() {
+        socket.disconnect()
+    }
 }

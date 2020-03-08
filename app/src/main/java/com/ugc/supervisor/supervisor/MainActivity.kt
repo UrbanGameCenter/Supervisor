@@ -7,6 +7,7 @@ import com.google.android.material.tabs.TabLayout
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.AbstractActivity
 import com.ugc.supervisor.supervisor.adapter.RoomPagerAdapter
+import com.ugc.supervisor.websocket.core.WebsocketManager
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AbstractActivity() {
@@ -28,6 +29,11 @@ class MainActivity : AbstractActivity() {
 
         tabs.setupWithViewPager(viewpager)
         tabs.setTabMode(TabLayout.MODE_FIXED)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        WebsocketManager.instance.onDestroy()
     }
 
 }
