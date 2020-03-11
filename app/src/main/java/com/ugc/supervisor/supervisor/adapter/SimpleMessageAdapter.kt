@@ -51,5 +51,10 @@ class SimpleMessageAdapter(val context: Context) : RecyclerView.Adapter<BaseView
 
     fun addData(messageFrom: MessageFrom) {
         messageFromList.add(messageFrom)
+        notifyItemChanged(messageFromList.size)
+    }
+
+    fun setData(roomMessages: List<MessageFrom>) {
+        messageFromList.addAll(roomMessages)
     }
 }

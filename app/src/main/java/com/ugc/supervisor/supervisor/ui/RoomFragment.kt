@@ -19,6 +19,7 @@ import com.google.gson.Gson
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.LOGGER_TAG
 import com.ugc.supervisor.core.PreferenceManager
+import com.ugc.supervisor.database.UgcDatabaseHelper
 import com.ugc.supervisor.model.Room
 import com.ugc.supervisor.supervisor.adapter.SimpleMessageAdapter
 import com.ugc.supervisor.supervisor.callback.SelectTextCallback
@@ -75,8 +76,14 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             )
         )
 
-        message_listview.setLayoutManager(linearLayoutManager);
-        message_listview.setAdapter(adapter);
+        message_listview.setLayoutManager(linearLayoutManager)
+
+
+        adapter.setData(UgcDatabaseHelper(activity!!.applicationContext).getRoomMessages(room))
+
+        message_listview.setAdapter(adapter)
+
+
 
         send_button.isEnabled = false
 
@@ -142,7 +149,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             addMessage(
                 MessageFrom(
                     MessageEmitter.system,
-                    "Fin de session"
+                    "Fin de session",
+                    System.currentTimeMillis()
                 )
             )
         }else{
@@ -155,7 +163,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             addMessage(
                 MessageFrom(
                     MessageEmitter.system,
-                    "Une session à été démarrée"
+                    "Une session à été démarrée",
+                    System.currentTimeMillis()
                 )
             )
         }
@@ -173,7 +182,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         addMessage(
             MessageFrom(
                 MessageEmitter.supervisor,
-                free_textmessage_edittext.getText().toString()
+                free_textmessage_edittext.getText().toString(),
+                System.currentTimeMillis()
             )
         )
 
@@ -223,8 +233,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             "Message from " + messageFrom.emitter + " : " + messageFrom.message
         )
 
+        UgcDatabaseHelper(activity!!.applicationContext).addMessage(messageFrom, room)
         adapter.addData(messageFrom)
-        adapter.notifyDataSetChanged()
     }
 
 }
