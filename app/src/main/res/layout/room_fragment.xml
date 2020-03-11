@@ -23,7 +23,6 @@
             android:id="@+id/action_indicator"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_play"
             android:tint="@android:color/white"/>
         <Chronometer
             android:id="@+id/chronometer"

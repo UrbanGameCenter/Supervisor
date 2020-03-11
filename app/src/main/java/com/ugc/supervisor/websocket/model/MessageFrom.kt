@@ -4,24 +4,20 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MessageFrom {
-    var emitter: String
+    var emitter: MessageEmitter
     var message: String
     private var date: String
     var isServerMessage : Boolean = false
 
-    constructor(nickname: String, message: String) {
+    constructor(emmiter: MessageEmitter, message: String) {
 
-        this.emitter = nickname
+        this.emitter = emmiter
         this.message = message
         this.date = LocalDateTime.now().format(
             DateTimeFormatter.ofPattern("HH:mm:ss")
         )
     }
 
-    fun setIsServerMessage(isServerMessage: Boolean): MessageFrom {
-        this.isServerMessage = isServerMessage
-        return this
-    }
 
     fun getFormatedDate() : String{
         return date

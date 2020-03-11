@@ -2,7 +2,7 @@ package com.ugc.supervisor.supervisor.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,16 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.LOGGER_TAG
-import com.ugc.supervisor.core.WEB_SERVICE_BASE_URL
+import com.ugc.supervisor.core.PreferenceManager
 import com.ugc.supervisor.model.Room
 import com.ugc.supervisor.supervisor.adapter.SimpleMessageAdapter
 import com.ugc.supervisor.supervisor.callback.SelectTextCallback
 import com.ugc.supervisor.websocket.core.WebsocketManager
 import com.ugc.supervisor.websocket.model.EventType
+import com.ugc.supervisor.websocket.model.MessageEmitter
 import com.ugc.supervisor.websocket.model.MessageFrom
 import com.ugc.supervisor.websocket.model.MessageTo
 import com.ugc.ugctv.settings.SelectTextDialogfragment
-import io.socket.client.IO
 import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.room_fragment.*
 
@@ -34,8 +34,6 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
     private val adapter: SimpleMessageAdapter
 
     private lateinit var selectTextDialogfragment: SelectTextDialogfragment
-
-    var isStarted = false
 
     companion object {
         fun newInstance(room: Room, context: Context): RoomFragment {
@@ -99,7 +97,7 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
 
             addMessage(
                 MessageFrom(
-                    "Supervisor",
+                    MessageEmitter.supervisor,
                     free_textmessage_edittext.getText().toString()
                 )
             )
@@ -107,18 +105,53 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             free_textmessage_edittext.getText().clear()
         }
 
+
+        setupChronometer()
+
         action_button.setOnClickListener {
-            if(isStarted){
+            if(PreferenceManager(context).isSessionStarted(room)){
                 WebsocketManager.instance.stopRoom(room)
+                PreferenceManager(context).finishSessionForRoom(room)
                 action_indicator.setImageResource(R.drawable.ic_play)
+                chronometer.base = SystemClock.elapsedRealtime()
                 chronometer.stop()
-                isStarted = false
+
+                addMessage(
+                    MessageFrom(
+                        MessageEmitter.system,
+                        "Fin de session"
+                    )
+                )
             }else{
                 WebsocketManager.instance.startRoom(room)
+                PreferenceManager(context).startSessionForRoom(room)
                 action_indicator.setImageResource(R.drawable.ic_stop)
+                chronometer.base = SystemClock.elapsedRealtime()
                 chronometer.start()
-                isStarted = true
+
+                addMessage(
+                    MessageFrom(
+                        MessageEmitter.system,
+                        "Une session à été démarrée"
+                    )
+                )
             }
+        }
+
+    }
+
+    private fun setupChronometer() {
+
+
+        if(PreferenceManager(context).isSessionStarted(room)) {
+            val elapsedRealtimeOffset =
+                System.currentTimeMillis() - SystemClock.elapsedRealtime()
+            chronometer.base =   PreferenceManager(context).getStartTimeForRoom(room) - elapsedRealtimeOffset
+            action_indicator.setImageResource(R.drawable.ic_stop)
+            chronometer.start()
+        }else{
+            chronometer.base = SystemClock.elapsedRealtime()
+            action_indicator.setImageResource(R.drawable.ic_play)
         }
     }
 
@@ -153,5 +186,7 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         adapter.addData(messageFrom)
         adapter.notifyDataSetChanged()
     }
+
+
 
 }
