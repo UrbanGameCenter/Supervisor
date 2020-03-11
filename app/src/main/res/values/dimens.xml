@@ -23,6 +23,7 @@
     <dimen name="tabnav_size">12dp</dimen>
     <dimen name="tab_indicator_height">4dp</dimen>
 
+    <dimen name="system_itemview_height">38dp</dimen>
     <dimen name="standard_itemview_height">70dp</dimen>
     <dimen name="standard_separator_height">0.5dp</dimen>
 </resources>

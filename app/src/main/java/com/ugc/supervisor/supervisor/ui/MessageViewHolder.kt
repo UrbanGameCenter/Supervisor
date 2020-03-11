@@ -12,7 +12,7 @@ class MessageViewHolder(itemView: View) : BaseViewHolder<MessageFrom>(itemView) 
 
     override fun bind(item: MessageFrom) {
         messageTextView.setText(item.message)
-        infoTextView.setText(item.getFormatedDate() + " Message envoyé")
+        infoTextView.setText(item.getFormatedDate())
     }
 
 }

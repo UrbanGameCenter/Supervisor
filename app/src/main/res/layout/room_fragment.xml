@@ -91,7 +91,7 @@
             android:layout_marginStart="@dimen/small"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_send"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/light_grey" />
 
     </LinearLayout>
     

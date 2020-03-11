@@ -3,14 +3,18 @@ package com.ugc.supervisor.supervisor.ui
 import android.content.Context
 import android.os.Bundle
 import android.os.SystemClock
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.LOGGER_TAG
@@ -74,6 +78,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         message_listview.setLayoutManager(linearLayoutManager);
         message_listview.setAdapter(adapter);
 
+        send_button.isEnabled = false
+
         list_text.setOnClickListener {
             selectTextDialogfragment = SelectTextDialogfragment(room)
                 .setCallBack(object : SelectTextCallback {
@@ -86,61 +92,95 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
             selectTextDialogfragment.show(activity!!.supportFragmentManager, SELECT_TEXT_DIALOG)
         }
 
+        free_textmessage_edittext.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {
+                }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    enabledButton(p0!!.trim().length != 0)
+                }
+            })
+
         send_button.setOnClickListener {
-
-            WebsocketManager.instance.sendMessage(
-                MessageTo(
-                    free_textmessage_edittext.getText().toString(),
-                    room.name
-                )
-            )
-
-            addMessage(
-                MessageFrom(
-                    MessageEmitter.supervisor,
-                    free_textmessage_edittext.getText().toString()
-                )
-            )
-
-            free_textmessage_edittext.getText().clear()
-        }
-
-
-        setupChronometer()
-
-        action_button.setOnClickListener {
             if(PreferenceManager(context).isSessionStarted(room)){
-                WebsocketManager.instance.stopRoom(room)
-                PreferenceManager(context).finishSessionForRoom(room)
-                action_indicator.setImageResource(R.drawable.ic_play)
-                chronometer.base = SystemClock.elapsedRealtime()
-                chronometer.stop()
-
-                addMessage(
-                    MessageFrom(
-                        MessageEmitter.system,
-                        "Fin de session"
-                    )
-                )
+                sendMessage()
             }else{
-                WebsocketManager.instance.startRoom(room)
-                PreferenceManager(context).startSessionForRoom(room)
-                action_indicator.setImageResource(R.drawable.ic_stop)
-                chronometer.base = SystemClock.elapsedRealtime()
-                chronometer.start()
-
-                addMessage(
-                    MessageFrom(
-                        MessageEmitter.system,
-                        "Une session à été démarrée"
-                    )
-                )
+                Snackbar.make(it,getString(R.string.session_not_started),Snackbar.LENGTH_LONG).show()
             }
         }
 
+        initChronometer()
+
+        action_button.setOnClickListener {
+            doStartStop()
+        }
     }
 
-    private fun setupChronometer() {
+    private fun enabledButton(shouldEnable: Boolean) {
+        if(shouldEnable){
+            send_button.setColorFilter(ContextCompat.getColor(activity!!.baseContext, R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
+        }else{
+            send_button.setColorFilter(ContextCompat.getColor(activity!!.baseContext, R.color.light_grey), android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+
+        send_button.isEnabled = shouldEnable
+    }
+
+    private fun doStartStop() {
+
+        if(PreferenceManager(context).isSessionStarted(room)){
+            WebsocketManager.instance.stopRoom(room)
+            PreferenceManager(context).finishSessionForRoom(room)
+            action_indicator.setImageResource(R.drawable.ic_play)
+            chronometer.base = SystemClock.elapsedRealtime()
+            chronometer.stop()
+
+            addMessage(
+                MessageFrom(
+                    MessageEmitter.system,
+                    "Fin de session"
+                )
+            )
+        }else{
+            WebsocketManager.instance.startRoom(room)
+            PreferenceManager(context).startSessionForRoom(room)
+            action_indicator.setImageResource(R.drawable.ic_stop)
+            chronometer.base = SystemClock.elapsedRealtime()
+            chronometer.start()
+
+            addMessage(
+                MessageFrom(
+                    MessageEmitter.system,
+                    "Une session à été démarrée"
+                )
+            )
+        }
+    }
+
+    private fun sendMessage() {
+
+        WebsocketManager.instance.sendMessage(
+            MessageTo(
+                free_textmessage_edittext.getText().toString(),
+                room.name
+            )
+        )
+
+        addMessage(
+            MessageFrom(
+                MessageEmitter.supervisor,
+                free_textmessage_edittext.getText().toString()
+            )
+        )
+
+        free_textmessage_edittext.getText().clear()
+    }
+
+    private fun initChronometer() {
 
 
         if(PreferenceManager(context).isSessionStarted(room)) {
@@ -186,7 +226,5 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         adapter.addData(messageFrom)
         adapter.notifyDataSetChanged()
     }
-
-
 
 }
