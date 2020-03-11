@@ -24,7 +24,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/free_textmessage_edittext"
+            android:id="@+id/textmessage_edittext"
             android:layout_width="0dp"
             style="@style/RoundedEditTextStyle"
             android:layout_height="wrap_content"

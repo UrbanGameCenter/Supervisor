@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
 import com.ugc.supervisor.R
 import com.ugc.supervisor.core.LOGGER_TAG
 import com.ugc.supervisor.core.PreferenceManager
@@ -24,12 +23,10 @@ import com.ugc.supervisor.model.Room
 import com.ugc.supervisor.supervisor.adapter.SimpleMessageAdapter
 import com.ugc.supervisor.supervisor.callback.SelectTextCallback
 import com.ugc.supervisor.websocket.core.WebsocketManager
-import com.ugc.supervisor.websocket.model.EventType
 import com.ugc.supervisor.websocket.model.MessageEmitter
 import com.ugc.supervisor.websocket.model.MessageFrom
 import com.ugc.supervisor.websocket.model.MessageTo
 import com.ugc.ugctv.settings.SelectTextDialogfragment
-import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.room_fragment.*
 
 class RoomFragment(val room: Room, context: Context) : Fragment() {
@@ -37,7 +34,6 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
     private val SELECT_TEXT_DIALOG = "SELECT_TEXT_DIALOG"
 
     private val adapter: SimpleMessageAdapter
-
     private lateinit var selectTextDialogfragment: SelectTextDialogfragment
 
     companion object {
@@ -62,11 +58,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        subscribeEvent()
-
-        val linearLayoutManager = LinearLayoutManager(activity);
-
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        val linearLayoutManager = LinearLayoutManager(activity)
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL)
         linearLayoutManager.setStackFromEnd(true)
 
         message_listview.addItemDecoration(
@@ -77,13 +70,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         )
 
         message_listview.setLayoutManager(linearLayoutManager)
-
-
         adapter.setData(UgcDatabaseHelper(activity!!.applicationContext).getRoomMessages(room))
-
         message_listview.setAdapter(adapter)
-
-
 
         send_button.isEnabled = false
 
@@ -92,14 +80,14 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
                 .setCallBack(object : SelectTextCallback {
                     override fun onTextSelected(text: String) {
                         selectTextDialogfragment.dismiss()
-                        free_textmessage_edittext.setText(text)
+                        textmessage_edittext.setText(text)
                     }
                 })
 
             selectTextDialogfragment.show(activity!!.supportFragmentManager, SELECT_TEXT_DIALOG)
         }
 
-        free_textmessage_edittext.addTextChangedListener(
+        textmessage_edittext.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -174,7 +162,7 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
 
         WebsocketManager.instance.sendMessage(
             MessageTo(
-                free_textmessage_edittext.getText().toString(),
+                textmessage_edittext.getText().toString(),
                 room.name
             )
         )
@@ -182,16 +170,15 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         addMessage(
             MessageFrom(
                 MessageEmitter.supervisor,
-                free_textmessage_edittext.getText().toString(),
+                textmessage_edittext.getText().toString(),
                 System.currentTimeMillis()
             )
         )
 
-        free_textmessage_edittext.getText().clear()
+        textmessage_edittext.getText().clear()
     }
 
     private fun initChronometer() {
-
 
         if(PreferenceManager(context).isSessionStarted(room)) {
             val elapsedRealtimeOffset =
@@ -202,28 +189,6 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
         }else{
             chronometer.base = SystemClock.elapsedRealtime()
             action_indicator.setImageResource(R.drawable.ic_play)
-        }
-    }
-
-
-    private fun subscribeEvent() {
-        WebsocketManager.instance.subscribeEvent(room.name, onMessage)
-        WebsocketManager.instance.subscribeEvent(EventType.serverMessage.name, onServerMessage)
-    }
-
-    private val onMessage = Emitter.Listener { args: Array<Any?> ->
-        activity?.runOnUiThread {
-            addMessage(
-                Gson().fromJson(args[0] as String, MessageFrom::class.java)
-            )
-        }
-    }
-
-    private val onServerMessage = Emitter.Listener { args: Array<Any?> ->
-        activity?.runOnUiThread {
-            addMessage(
-                Gson().fromJson(args[0] as String, MessageFrom::class.java)
-            )
         }
     }
 
