@@ -200,6 +200,8 @@ class RoomFragment(val room: Room, context: Context) : Fragment() {
 
         UgcDatabaseHelper(activity!!.applicationContext).addMessage(messageFrom, room)
         adapter.addData(messageFrom)
+        message_listview.scrollToPosition(adapter.itemCount - 1);
+
     }
 
 }

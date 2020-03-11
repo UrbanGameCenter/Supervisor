@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Supervisor</string>
+    <string name="app_name">Ugc Supervisor</string>
 
     <string name="version_string">Version : </string>
     <string name="netword_unavailable_generic_error">Vous n\'êtes pas connecté à Internet. Veuillez rétablir votre connexion pour continuer.</string>

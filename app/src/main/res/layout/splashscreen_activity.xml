@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="600dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_logo_ugc"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/marge_large"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="@dimen/marge_large"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

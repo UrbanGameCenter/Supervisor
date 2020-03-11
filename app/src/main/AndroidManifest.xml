@@ -14,8 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".splashscreen.SplashScreenActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|screenSize|screenLayout"
             android:theme="@style/FullTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,13 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".supervisor.SupervisorActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:screenOrientation="landscape"
-            android:theme="@style/FullTranslucent"/>
         <activity android:name=".supervisor.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:screenOrientation="landscape"
             android:theme="@style/FullTranslucent"/>
     </application>
 
