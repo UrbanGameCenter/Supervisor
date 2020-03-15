@@ -1,34 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="jig_saw_messages">
-        <item>message numéro 1</item>
-        <item>message numéro 2</item>
-        <item>message numéro 3</item>
-        <item>message numéro 4</item>
+        <item>Pour vous libérer de vos chaînes il vous faudra plonger votre main dans l’inconnu.</item>
+        <item>Fouillez dans les pots qui vous entourent et trouvez la bonne clef …</item>
+        <item>Voici un double de la clef de vos menottes</item>
+        <item>Comptez les éléments dans les pots identiques</item>
+        <item>3 pots identiques = 1 code à 3 chiffres</item>
+        <item>Le code du tiroir est 5_7</item>
+        <item>On m’appelle le tueur au puzzle, à vous de rassembler les morceaux !</item>
+        <item>Augmentez le niveau de liquide afin de faire remonter la clef et pouvoir l’extraire pour vous libérer !</item>
+        <item>Aidez votre colocataire à retrouver la vue et il vous ouvrira la porte…</item>
+        <item>LES MURS RENFERMENT DES CHIFFRES CE QUI VOUS DONNERONT UN ESPOIR DE RESTER EN VIE AVANT LA VENUE DE BILLY TROUVEZ VITE LA COMBINAISON A 4 CHIFFRES !</item>
+        <item>Trouvez la bonne combinaison dans le sens des aiguilles d’une montre</item>
+        <item>le 8 étant le début de la combinaison</item>
+        <item>Le code de la grille est 8 _ 1 _</item>
+        <item>Le code de la grille est 8517</item>
+        <item>Un peu sombre ??!! trouvez la lumière.</item>
+        <item>L’air que vous respirez désormais est contaminé par un virus mortel, vous avez quelques minutes pour trouver les antidotes ! Tic Tac, la vie ou la mort … faites votre choix</item>
+        <item>Fouillez bien afin de trouver une petite boite</item>
+        <item>Le casse-tête en bois s’ouvre en tirant sur les angles opposés.</item>
+        <item>Les murs renferment peut être un secret.</item>
+        <item>Comptez les récurrences des chiffres de sang au mur afin d’obtenir le code du coffre</item>
+        <item>Savez-vous compter ? 1, 2, 3, …</item>
+        <item>Le code du coffre est 2 9 6</item>
+        <item>1 Bonbon = 1 antidote</item>
+        <item>Tic tac tic tac , la vie ou la mort n’avez-vous rien oublier dans la première salle ?!?!!</item>
+        <item>Bientôt la fin de votre vie !!!! Trouvez la récurrence des chiffres  _ 9 _ .</item>
+        <item>NE PAS MONTER SUR LE DECOR</item>
+        <item>NE PAS OUVRIR LA BOITE ELECTRIQUE</item>
+        <item>NE PAS OUVRIR LES BOCAUX SCELLES</item>
+        <item>NE PAS TOUCHER A LA TRAPPE AU PLAFOND</item>
+        <item>NE PAS TIRER SUR LE CABLE ELECTRIQUE</item>
+        <item>NE PAS CRAQUER LES CADENAS</item>
     </string-array>
 
     <string-array name="prison_breakout_messages">
-        <item>message numéro 1</item>
-        <item>message numéro 2</item>
-        <item>message numéro 3</item>
-        <item>message numéro 4</item>
+        <item>Pour la cellule d’isolement, Utilisez l’aimant rouge pour vous libérer des contentions</item>
+        <item>Pour la cellule d’isolement, regardez dans la cellule n°3, il y a un nombre de TOC à reproduire en frappant à la porte</item>
+        <item>Recommencez et respectez bien le nombre de TOC</item>
+        <item>Recommencez</item>
+        <item>Entre les cellules 1 et 2, collaborez pour faire remonter la clef grâce à l’aimant</item>
+        <item>Pour ouvrir les malles les indices sont dans vos cellules</item>
+        <item>Pour la cellule n°3 : observez bien les tatouages</item>
+        <item>La rose est votre tatouage favori</item>
+        <item>Pour la cellule n°1 : observez attentivement la photo dans votre cellule</item>
+        <item>Cellule n°1 : les souvenirs de votre famille vous aideront à trouver la combinaison</item>
+        <item>Pour trouver la combinaison du livre compter le nombre de jour depuis lequel vous êtes enfermé.</item>
+        <item>Utilisez le laser de 1 à 4</item>
+        <item>1 seul tir par cible, 1 son valide le tir</item>
+        <item>Observez bien les objets sur le bureau</item>
+        <item>Trouvez la combinaison de couleur</item>
+        <item>Comptez les éléments dans le pot sur le bureau</item>
+        <item>Comptez le nombre de tube de colle, de trombones …</item>
+        <item>Le pot vert = 1</item>
+        <item>La carte magnétique ouvre la porte de l’infirmerie</item>
+        <item>Passez la bande magnétique du côté gauche</item>
+        <item>Observez bien les casiers de l’infirmière</item>
+        <item>La photo de l’infirmière vous donnera la combinaison à 4 chiffres</item>
+        <item>Observez bien, Eliott a 2 jours</item>
+        <item>Observez bien les tiroirs que vous avez ouverts</item>
+        <item>Trop de mauvaises combinaisons bloquent le coffre 30 secondes</item>
+        <item>En attendant observez  tout ce qui vous entoure afin de prévoir votre évasion</item>
+        <item>Validez votre combinaison par E qui veut dire entré</item>
+        <item>7 _ 0 _ E</item>
+        <item>Bravo vous avez trouvé la preuve de votre innocence</item>
+        <item>Bloquez l’arrivée des gardiens en baissant les disjoncteurs du tableau électrique</item>
+        <item>Déplacez les casiers bleus et évadez-vous !</item>
+        <item>ATTENTION !!! JE VOIS LE GARDIEN ARRIVER !</item>
+        <item>Je viens d’intercepter une conversation du directeur ! Attention, il demande au gardien de prison de faire une ronde, il soupçonne un projet d’évasion.</item>
+        <item>NE PAS MONTER SUR LES GRILLES</item>
+        <item>NE RIEN DEVISSER</item>
+        <item>NE PAS ENFONCER DE STYLOS DANS LES TROUS</item>
+        <item>NE PAS SORTIR PAR LA PORTE DU GARDIEN</item>
     </string-array>
 
     <string-array name="howard_carter_messages">
-        <item>message numéro 1</item>
-        <item>message numéro 2</item>
-        <item>message numéro 3</item>
-        <item>message numéro 4</item>
-        <item>message numéro 5</item>
-        <item>message numéro 6</item>
-        <item>message numéro 7</item>
-        <item>message numéro 8</item>
-        <item>message numéro 10</item>
-        <item>message numéro 11</item>
-        <item>message numéro 12</item>
-        <item>message numéro 13</item>
-        <item>message numéro 14</item>
-        <item>message numéro 15</item>
+        <item>Mon arbre généalogique ainsi que mon calendrier vous seront d’une grande utilité</item>
+
+        <item>
+            La saint ____ \n
+            La saint ____ \n
+            La saint ____ \n
+        </item>
+        <item>
+            La saint    _1_ \n
+            La saint    _9_ \n
+            La saint    _7_ \n
+        </item>
+        <item>Le code de la cheminée est 6 8 1</item>
+        <item>Mes tableaux donneront un code à 3 chiffres pour la cheminée</item>
+        <item>Mes tableaux vous donneront_ _ _</item>
+        <item>Entrez DANS la cheminée</item>
+        <item>Vous pouvez bouger mes tableaux</item>
+        <item>Cherchez un autre cadenas ! (indice : dans mon antre il fait très noir)</item>
+        <item>Eclairez les briques intérieures de la cheminée</item>
+        <item>3 indices = 1 objet</item>
+        <item>Mon premier     ____ \n</item>
+        <item>Mon deuxième  ____ \n</item>
+        <item>Mon troisième   ____</item>
+        <item>
+            Mon premier     : Toutankhamon\n
+            Mon deuxième  ____\n
+            Mon troisième   ____
+        </item>
+        <item>
+            Mon premier     : Toutankhamon \n
+            Mon deuxième : Chat égyptien \n
+            Mon troisième   : Nefertiti
+        </item>
+        <item>
+            Mon premier     : Toutankhamon \n
+            Mon deuxième : Chat égyptien \n
+            Mon troisième   : Nefertiti
+        </item>
+        <item>Sous le tapis</item>
+        <item>8 images   4 phrases  1 code morse Donnent 1 code à 4 chiffres</item>
+        <item>4 phrases :\n
+            Pierre égyptienne sur la cheminée\n
+            Sous le tiroir du bureau\n
+            Dans le tiroir de la commode\n
+            Dans la trousse de voyage
+        </item>
+        <item>8 _ _ _</item>
+        <item>8 _ _ 4</item>
+        <item>8_ 7 4</item>
+        <item>Tourne vis : Howard Carter</item>
+        <item>Mon nom est la clef de ma plus grande découverte</item>
+        <item>Essayez un autre cadenas</item>
+        <item>Regardez bien les objets qui vous entourent</item>
+        <item>On ne triche pas !  On ne craque pas les codes des cadenas !</item>
+        <item>On ne devisse pas les plinthes</item>
+
 
 
 
